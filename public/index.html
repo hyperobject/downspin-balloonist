@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.4.0/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-firebase-component@^4.0.0/dist/aframe-firebase-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.7.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <a-scene physics
+             firebase="config-here">
+      <!-- <a-sphere radius="0.1" position="1 1 0"></a-sphere> -->
+      <a-assets>
+      <!-- Using mixins to decrease amount of data send over the wire. -->
+      <a-cylinder id="cyl3" static-body position="3 1 10.5" src="SoylentBottle.png" height="3" radius="1"></a-cylinder>
+
+      <a-mixin id="avatar-head"
+              geometry="primitive: cylinder; height: 3; radius: 1"
+              material="src: SoylentBottle.png" static-body></a-mixin>
+    </a-assets>
+
+    <a-entity id="avatar" mixin="avatar-head"
+              camera universal-controls
+              dynamic-body
+              firebase-broadcast="components: mixin, position, rotation"
+              position="0 1.8 5">
+    </a-entity>
+      <a-plane static-body src="skybox2.png" height="200" width="200" rotation="-90 0 0"></a-plane>
+      <a-sky src="TRIANGLESKY.png"></a-sky>
+      <a-light type="ambient" color="#555"></a-light>
+      <a-light color="#AAA" position="0 5 0"></a-light>
+      <a-obj-model color="#EF4836" scale="0.01 0.01 0.01" position="10 4 0" rotation="-90 0 0" src="ballon.obj"></a-obj-model>
+      <a-obj-model color="#3498DB" scale="0.01 0.01 0.01" position="-10 3 0" rotation="-90 0 0" src="ballon.obj"></a-obj-model>
+      <a-obj-model color="#2ECC71" scale="0.01 0.01 0.01" position="-10 2 10" rotation="-90 0 0" src="ballon.obj"></a-obj-model>
+      <a-obj-model color="#F7CA18" scale="0.01 0.01 0.01" position="10 2 -10" rotation="-90 0 0" src="ballon.obj"></a-obj-model>
+      <a-obj-model color="#2ABB9B" scale="0.01 0.01 0.01" position="10 4 30" rotation="-90 0 0" src="ballon.obj"></a-obj-model>
+    </a-scene>
+  </body>
+</html>
